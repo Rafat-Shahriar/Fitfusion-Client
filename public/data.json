@@ -1,0 +1,72 @@
+[
+    {
+      "id": 1,
+      "name": "Yoga Classes",
+      "description": "Relax your mind and body with our guided yoga sessions.",
+      "price": "30",
+      "image": "  https://i.ibb.co.com/z2KB5Mq/download.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Strength Training",
+      "description": "Build muscle and improve strength with our weight training program.",
+      "price": "50",
+      "image": "https://i.ibb.co.com/JHVpHbG/image2.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Cardio Sessions",
+      "description": "Increase your endurance with our high-intensity cardio workouts.",
+      "price": "40",
+      "image": "https://i.ibb.co.com/1d9YJyh/imag3.jpg"
+    },
+    {
+      "id": 4,
+      "name": "CrossFit Classes",
+      "description": "Improve overall strength and endurance with our high-intensity CrossFit training.",
+      "price": "60",
+      "image": "https://i.ibb.co.com/VH4xHqB/image4.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Personal Training",
+      "description": "Get personalized training sessions with one of our expert trainers.",
+      "price": "100",
+      "image": "https://i.ibb.co.com/FB5HdMp/imag5.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Zumba Classes",
+      "description": "Join our fun and energetic Zumba classes to improve your fitness with dance.",
+      "price": "35",
+      "image": "https://i.ibb.co.com/S6SHf7N/image6.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Pilates Classes",
+      "description": "Strengthen your core and improve flexibility with our Pilates sessions.",
+      "price": "45",
+      "image": "https://i.ibb.co.com/yNY71p9/image7.jpg"
+    },
+    {
+      "id": 8,
+      "name": "HIIT Workouts",
+      "description": "Burn fat and increase endurance with our high-intensity interval training.",
+      "price": "50",
+      "image": "https://i.ibb.co.com/jzZDQzW/image8.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Spin Classes",
+      "description": "Improve your cardio and burn calories with our indoor cycling spin classes.",
+      "price": "40",
+      "image": "https://i.ibb.co.com/SQX8xdK/image9.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Boot Camp",
+      "description": "Push your limits with our outdoor boot camp-style fitness sessions.",
+      "price": "55",
+      "image": "https://i.ibb.co.com/b1nymB4/image10.jpg"
+    }
+  ]
