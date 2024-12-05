@@ -142,17 +142,26 @@ const Profile = () => {
                             <h1 className="text-2xl font-bold">{userData.name}</h1>
                             <p className="text-red-100">{userData.email}</p>
 
-                            {/* New P Tag and Link Button */}
-                            <p className="mt-4 text-sm text-red-100">
-                                See What Other People’s Goals and Routines{" "}
+                            <div className="mt-4 flex flex-col md:flex-row gap-3">
+                                <Link
+                                    to="/fitnessDashboard"
+                                    className="text-red-500 bg-white px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white transition duration-300"
+                                >
+                                    Fitness Dashboard
+                                </Link>
+                                <Link
+                                    to="/activityDashboard"
+                                    className="text-red-500 bg-white px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white transition duration-300"
+                                >
+                                    Workout Dashboard
+                                </Link>
                                 <Link
                                     to="/goalsAndRoutines"
-                                    // onClick={() => alert("Navigating to others' goals!")} // Replace with actual navigation logic
-                                    className="text-white underline ml-1 hover:text-gray-200"
+                                    className="text-red-500 bg-white px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white transition duration-300"
                                 >
-                                    here
+                                    Goals & Routines
                                 </Link>
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -15,7 +15,11 @@ import { Toaster } from 'react-hot-toast';
 import HomePage from './Pages/Home/HomePage';
 import Profile from './Pages/Profile/Profile';
 import PrivateRoute from './routes/PrivateRoute'
+import WorkoutPlanner from './Pages/WorkoutPlanner/WorkoutPlanner';
+// import NutritionTracker from './Pages/Nutrition Tracker/NutritionTracker';
 import GoalsAndRoutines from './Pages/GoalsAndRoutines/GoalsAndRoutines';
+// import FitnessDashboard from './Pages/FitnessDashboard/FitnessDashboard';
+// import ActivityLog from './Pages/Activity Log/ActivityLog';
 
 
 const router = createBrowserRouter([
@@ -27,7 +31,10 @@ const router = createBrowserRouter([
         index: true,
         element: <HomePage></HomePage>,
       },
-      
+      // {
+      //   path: "/nutritionTracker",
+      //   element: <PrivateRoute><NutritionTracker></NutritionTracker></PrivateRoute>,
+      // },
       {
         path: "/profile",
         element: <PrivateRoute><Profile></Profile></PrivateRoute>,
@@ -36,7 +43,18 @@ const router = createBrowserRouter([
         path: "/goalsAndRoutines",
         element: <PrivateRoute><GoalsAndRoutines></GoalsAndRoutines></PrivateRoute>,
       },
-      
+      {
+        path: "/workoutPlanner",
+        element: <PrivateRoute><WorkoutPlanner></WorkoutPlanner></PrivateRoute>,
+      },
+      // {
+      //   path: "/activityDashboard",
+      //   element: <PrivateRoute><ActivityLog></ActivityLog></PrivateRoute>,
+      // },
+      // {
+      //   path: "/fitnessDashboard",
+      //   element: <PrivateRoute><FitnessDashboard></FitnessDashboard></PrivateRoute>,
+      // },
       { path: '/signin', element: <Signin /> },
       { path: '/signup', element: <Signup /> },
     ]
