@@ -6,7 +6,6 @@ import useAuth from '../../Hooks/useAuth';
 import { GiTireIronCross } from "react-icons/gi";
 import { LuListChecks } from "react-icons/lu";
 
-
 const Profile = () => {
     const { user } = useAuth();
     const [userData, setUserData] = useState(null);
@@ -23,7 +22,6 @@ const Profile = () => {
         goals: [],
         dailyExercise: "",
     });
-    console.log(userData ,formData);
 
     const routines = {
         "Build Muscle": {
@@ -45,7 +43,7 @@ const Profile = () => {
     }, [user]);
 
     const getData = async () => {
-        const { data } = await axios(`http://localhost:9000/users/${user?.email}`);
+        const { data } = await axios(`${import.meta.env.VITE_API_URL}/users/${user?.email}`);
         setUserData(data);
         setFormData(data);
     }
@@ -62,7 +60,7 @@ const Profile = () => {
         try {
             const dataToSend = { ...formData };
             delete dataToSend._id;
-            await axios.put(`http://localhost:9000/users/${user?.email}`, dataToSend);
+            await axios.put(`${import.meta.env.VITE_API_URL}/users/${user?.email}`, dataToSend);
             await getData();
             setIsModalOpen(false);
         } catch (error) {
@@ -95,7 +93,7 @@ const Profile = () => {
             };
 
             delete updatedData._id;
-            await axios.put(`http://localhost:9000/users/${user?.email}`, updatedData);
+            await axios.put(`${import.meta.env.VITE_API_URL}/users/${user?.email}`, updatedData);
             await getData();
 
             setCurrentGoal("");
@@ -106,14 +104,14 @@ const Profile = () => {
             console.error("Error updating goal:", error);
         }
     };
+
     const handleComplete = async (goalIndex) => {
         const updatedUserData = { ...userData };
         updatedUserData.goals[goalIndex].status = "Complete";
         delete updatedUserData._id;
-        await axios.put(`http://localhost:9000/users/${user?.email}`, updatedUserData);
+        await axios.put(`${import.meta.env.VITE_API_URL}/users/${user?.email}`, updatedUserData);
         await getData();
     };
-
 
     if (!userData) {
         return (
@@ -124,40 +122,41 @@ const Profile = () => {
     }
 
     return (
-        <div className="min-h-screen bg-black p-6">
+        <div className="min-h-screen bg-black p-4 md:p-6">
             <div className="max-w-4xl mx-auto mb-5">
-                <div className="bg-gradient-to-r from-red-600 to-rose-600 rounded-t-2xl p-8 relative">
-                    <div className="flex flex-col md:flex-row items-center gap-6">
+                {/* Profile Header */}
+                <div className="bg-gradient-to-r from-red-600 to-rose-600 rounded-t-2xl p-4 md:p-8 relative">
+                    <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
                         {/* Profile Image */}
-                        <div className="relative group">
+                        <div className="relative">
                             <img
                                 src={formData.photoUrl}
                                 alt="Profile"
-                                className="w-32 h-32 rounded-full objeccover border-4 border-white"
+                                className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white"
                             />
                         </div>
 
                         {/* Basic Info */}
                         <div className="text-white text-center md:text-left">
-                            <h1 className="text-2xl font-bold">{userData.name}</h1>
-                            <p className="text-red-100">{userData.email}</p>
+                            <h1 className="text-xl md:text-2xl font-bold">{userData.name}</h1>
+                            <p className="text-red-100 text-sm md:text-base">{userData.email}</p>
 
-                            <div className="mt-4 flex flex-col md:flex-row gap-3">
+                            <div className="mt-4 flex flex-col sm:flex-row gap-2 md:gap-3">
                                 <Link
-                                    to="/fitnessDashboard"
-                                    className="text-red-500 bg-white px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white transition duration-300"
+                                    to="/nutrationDashboard"
+                                    className="text-red-500 bg-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-sm md:text-base hover:bg-red-500 hover:text-white transition duration-300"
                                 >
-                                    Fitness Dashboard
+                                    Nutration Dashboard
                                 </Link>
                                 <Link
-                                    to="/activityDashboard"
-                                    className="text-red-500 bg-white px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white transition duration-300"
+                                    to="/wrokoutDashboard"
+                                    className="text-red-500 bg-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-sm md:text-base hover:bg-red-500 hover:text-white transition duration-300"
                                 >
                                     Workout Dashboard
                                 </Link>
                                 <Link
                                     to="/goalsAndRoutines"
-                                    className="text-red-500 bg-white px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white transition duration-300"
+                                    className="text-red-500 bg-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-sm md:text-base hover:bg-red-500 hover:text-white transition duration-300"
                                 >
                                     Goals & Routines
                                 </Link>
@@ -165,32 +164,32 @@ const Profile = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
+
+            {/* Personal Details Section */}
             <div className="max-w-4xl mx-auto mb-5">
-                <div className="bg-zinc-900 border-red-600 border-2 rounded-xl shadow-lg p-6">
-                    <div className="flex justify-between items-start mb-8">
+                <div className="bg-zinc-900 border-red-600 border-2 rounded-xl shadow-lg p-4 md:p-6">
+                    <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6 md:mb-8">
                         <div className="flex items-center space-x-4">
-                            <div className="bg-red-600 p-3 rounded-full animate-pulse">
-                                <FiUser className="w-8 h-8 text-white" />
+                            <div className="bg-red-600 p-2 md:p-3 rounded-full animate-pulse">
+                                <FiUser className="w-6 h-6 md:w-8 md:h-8 text-white" />
                             </div>
                             <div>
-                                <h1 className="text-3xl font-bold text-white">Personal Details</h1>
-                                <p className="text-red-400">Transform & Conquer</p>
+                                <h1 className="text-2xl md:text-3xl font-bold text-white">Personal Details</h1>
+                                <p className="text-red-400 text-sm md:text-base">Transform & Conquer</p>
                             </div>
                         </div>
-                        <div className="flex space-x-3">
-                            <button
-                                onClick={() => setIsModalOpen(true)}
-                                className="flex items-center px-4 py-2 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition-all duration-300 transform hover:scale-105">
-                                <FiEdit2 className="w-4 h-4 mr-2" />
-                                Edit
-                            </button>
-                        </div>
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="flex items-center px-3 py-1.5 md:px-4 md:py-2 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition-all duration-300 transform hover:scale-105"
+                        >
+                            <FiEdit2 className="w-4 h-4 mr-2" />
+                            Edit
+                        </button>
                     </div>
 
-                    {/* Stats Section */}
-                    <div className="grid grid-cols-4 gap-6 mb-8">
+                    {/* Stats Grid */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
                         {[
                             { label: "Name", value: userData.name, icon: <FiUser className="w-5 h-5" /> },
                             { label: "Age", value: `${userData.age} years`, icon: <FiCalendar className="w-5 h-5" /> },
@@ -199,17 +198,93 @@ const Profile = () => {
                         ].map((stat, index) => (
                             <div
                                 key={index}
-                                className="bg-zinc-800 rounded-xl p-4 transform hover:scale-105 transition-all duration-300 border border-red-600/20 hover:border-red-600"
+                                className="bg-zinc-800 rounded-xl p-3 md:p-4 transform hover:scale-105 transition-all duration-300 border border-red-600/20 hover:border-red-600"
                             >
-                                <div className="flex items-center space-x-2 mb-2">
+                                <div className="flex items-center space-x-2 mb-1 md:mb-2">
                                     <div className="text-red-500">{stat.icon}</div>
-                                    <p className="text-sm font-medium text-gray-400">{stat.label}</p>
+                                    <p className="text-xs md:text-sm font-medium text-gray-400">{stat.label}</p>
                                 </div>
-                                <p className="text-lg font-bold text-white">{stat.value}</p>
+                                <p className="text-base md:text-lg font-bold text-white">{stat.value}</p>
                             </div>
                         ))}
                     </div>
                 </div>
+            </div>
+
+            {/* Fitness Dashboard Section */}
+            <div className="max-w-4xl mx-auto">
+                <div className="bg-zinc-900 border-red-600 border-2 rounded-xl shadow-lg p-4 md:p-6">
+                    <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6 md:mb-8">
+                        <div className="flex items-center space-x-4">
+                            <div className="bg-red-600 p-2 md:p-3 rounded-full animate-pulse">
+                                <FiActivity className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                            </div>
+                            <div>
+                                <h1 className="text-2xl md:text-3xl font-bold text-white">Fitness Dashboard</h1>
+                                <p className="text-red-400 text-sm md:text-base">Transform & Conquer</p>
+                            </div>
+                        </div>
+                        <button
+                            onClick={() => setIsGoalModalOpen(true)}
+                            className="flex items-center px-3 py-1.5 md:px-4 md:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-600/30"
+                        >
+                            <FiPlus className="w-4 h-4 mr-2" />
+                            Add Goal
+                        </button>
+                    </div>
+
+                    {/* Goals Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        {userData?.goals?.map((goalData, index) => (
+                            <div
+                                key={index}
+                                className="bg-zinc-800 rounded-xl p-4 transform hover:scale-105 transition-all duration-300 border border-red-600/20 hover:border-red-600"
+                            >
+                                <div className="flex items-center justify-between mb-4">
+                                    <div className="flex items-center space-x-2">
+                                        <div className="text-red-500">
+                                            <FiAward className="w-5 h-5" />
+                                        </div>
+                                        <h3 className="text-base md:text-lg font-semibold text-white">{goalData.goal}</h3>
+                                    </div>
+                                    <span className="px-2 py-1 text-xs font-medium bg-red-600/20 text-red-400 rounded-full">
+                                        {goalData.status}
+                                    </span>
+                                </div>
+
+                                <div className="space-y-2">
+                                    {goalData.routine && goalData.routine.length > 0 ? (
+                                        goalData.routine.map((routine, routineIndex) => (
+                                            <p key={routineIndex} className="text-sm md:text-base text-gray-400">{routine}</p>
+                                        ))
+                                    ) : (
+                                        <p className="text-sm md:text-base text-gray-400">No routine available</p>
+                                    )}
+                                </div>
+
+                                <div className="mt-4 pt-3 border-t border-red-600/10">
+                                    <div className="flex flex-col sm:flex-row justify-between gap-2">
+                                        <div className="flex items-center space-x-2">
+                                            <FiCalendar className="w-4 h-4 text-red-400" />
+                                            <span className="text-xs text-gray-400">
+                                                Started: {new Date(goalData.startDate).toLocaleDateString()}
+                                            </span>
+                                        </div>
+                                        {goalData.status !== "Complete" && (
+                                            <button
+                                                onClick={() => handleComplete(index)}
+                                                className="w-full sm:w-auto bg-red-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-700 transition-all duration-300 transform hover:scale-105"
+                                            >
+                                                Mark as Complete
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
                 {/* Profile Edit Modal remains the same */}
                 {isModalOpen && (
                     <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-50">
@@ -259,90 +334,7 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                )}
-            </div>
-            <div className="max-w-4xl mx-auto">
-                <div className="bg-zinc-900 border-red-600 border-2 rounded-xl shadow-lg p-6">
-                    <div className="flex justify-between items-start mb-8">
-                        <div className="flex items-center space-x-4">
-                            <div className="bg-red-600 p-3 rounded-full animate-pulse">
-                                <FiActivity className="w-8 h-8 text-white" />
-                            </div>
-                            <div>
-                                <h1 className="text-3xl font-bold text-white">Fitness Dashboard</h1>
-                                <p className="text-red-400">Transform & Conquer</p>
-                            </div>
-                        </div>
-                        <div className="flex space-x-3">
-                            <button
-                                onClick={() => setIsGoalModalOpen(true)}
-                                className="flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-red-600/30">
-                                <FiPlus className="w-4 h-4 mr-2" />
-                                Add Goal
-                            </button>
-                        </div>
-                    </div>
-
-                    {/*Fitness Stats Section */}
-                    {/* Fitness Stats Section */}
-                    <div className="grid grid-cols-4 gap-6 mb-8">
-                        {userData?.goals?.map((goalData, index) => (
-                            <div
-                                key={index}
-                                className="col-span-2 bg-zinc-800 rounded-xl p-4 transform hover:scale-105 transition-all duration-300 border border-red-600/20 hover:border-red-600"
-                            >
-                                <div className="flex items-center justify-between mb-4">
-                                    <div className="flex items-center space-x-2">
-                                        <div className="text-red-500">
-                                            <FiAward className="w-5 h-5" />
-                                        </div>
-                                        <h3 className="text-lg font-semibold text-white">{goalData.goal}</h3>
-                                    </div>
-                                    <span className="px-2 py-1 text-xs font-medium bg-red-600/20 text-red-400 rounded-full">
-                                        {goalData.status}
-                                    </span>
-                                </div>
-
-                                <div className="space-y-2">
-                                    {goalData.routine && goalData.routine.length > 0 ? (
-                                        goalData.routine.map((routine, routineIndex) => (
-                                            <p key={routineIndex} className="text-gray-400">{routine}</p>
-                                        ))
-                                    ) : (
-                                        <p className="text-gray-400">No routine available</p>
-                                    )}
-                                </div>
-
-
-                                <div className="mt-4 pt-3 border-t border-red-600/10">
-                                    <div className="flex justify-between space-x-2">
-                                        <div className="flex items-center space-x-2">
-                                            <FiCalendar className="w-4 h-4 text-red-400" />
-                                            <span className="text-xs text-gray-400">
-                                                Started: {new Date(goalData.startDate).toLocaleDateString()}
-                                            </span>
-                                        </div>
-                                        <div>
-                                            {goalData.status !== "Complete" && (
-                                                <button
-                                                    onClick={() => handleComplete(index)}
-                                                    className="mt-4 w-full bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-105"
-                                                >
-                                                    Mark as Complete
-                                                </button>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        ))}
-                    </div>
-
-
-
-                </div>
-                {/* Goal Modal */}
+                )}{/* Goal Modal */}
                 {isGoalModalOpen && (
                     <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50">
                         <div className="bg-gradient-to-br from-black via-red-950 to-black rounded-xl p-8 max-w-md w-full m-4 

@@ -34,32 +34,32 @@ const Header = () => {
               className="menu menu-sm dropdown-content bg-black bg-opacity-80 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <Link to="/" className={`hover:text-red-500 ${isActiveRoute('/') ? 'bg-red-500' : ''}`}>
+                <Link to="/" className={`hover:bg-red-500 rounded-full ${isActiveRoute('/') ? 'bg-red-500' : ''}`}>
                   Home
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/goalsAndRoutines"
-                  className={`hover:text-red-500 ${isActiveRoute('/service') ? 'bg-red-500' : ''}`}
+                  to="/workoutPlanner"
+                  className={`hover:bg-red-500 rounded-full ${isActiveRoute('/workoutPlanner') ? 'bg-red-500' : ''}`}
                 >
-                  GoalsAndRoutines
+                  WorkoutPlanner
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/contact"
-                  className={`hover:text-red-500 ${isActiveRoute('/contact') ? 'bg-red-500' : ''}`}
+                  to="/nutritionTracker"
+                  className={`hover:bg-red-500 rounded-full ${isActiveRoute('/nutrition Tracker') ? 'bg-red-500' : ''}`}
                 >
-                  Contact
+                  Nutrition Tracker
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/about"
-                  className={`hover:text-red-500 ${isActiveRoute('/about') ? 'bg-red-500' : ''}`}
+                  to="/profile"
+                  className={`hover:bg-red-500 rounded-full ${isActiveRoute('/profile') ? 'bg-red-500' : ''}`}
                 >
-                  About
+                  Profile
                 </Link>
               </li>
             </ul>

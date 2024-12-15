@@ -41,7 +41,7 @@ const Signup = () => {
                             // email
                         };
                         // Use Axios to post user data
-                        axios.post('http://localhost:9000/user', userData)
+                        axios.post(`${import.meta.env.VITE_API_URL}/user`, userData)
                             .then(() => {
                                 console.log(userData);
                                 toast.success("User registered successfully!");

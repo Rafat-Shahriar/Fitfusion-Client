@@ -9,7 +9,7 @@ const GoalsAndRoutines = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:9000/users');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/users`);
         const data = await response.json();
 
         // Check if data exists and is an array
